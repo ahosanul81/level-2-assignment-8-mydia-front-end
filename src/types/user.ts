@@ -1,4 +1,4 @@
-export interface IUser {
+export interface IUserModified {
   success: boolean;
   statusCode: number;
   message: string;
@@ -15,4 +15,43 @@ export interface IUser {
     createdAt: string;
     updatedAt: string;
   };
+}
+
+export interface IAdmin {
+  id?: string;
+  userId?: string;
+  user?: IUser;
+  name?: string;
+  email?: string;
+  profilePhoto?: string;
+  contactNumber?: string;
+  address?: string;
+  isDeleted?: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+export interface IMember {
+  id?: string;
+  userId?: string;
+  user?: IUser;
+  name?: string;
+  email?: string;
+  profilePhoto?: string;
+  contactNumber?: string;
+  address?: string;
+  isVerified?: boolean;
+  isDeleted?: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+export interface IUser {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  status: string;
+  Admin?: IAdmin;
+  Member?: IMember;
+  createdAt?: Date;
+  updatedAt?: Date;
 }

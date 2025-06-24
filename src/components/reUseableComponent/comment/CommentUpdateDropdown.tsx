@@ -16,6 +16,7 @@ interface CommentProps {
 }
 export default function CommentUpdateDropdown({
   comment,
+
   setCommentUpdate,
 }: CommentProps) {
   const items = [

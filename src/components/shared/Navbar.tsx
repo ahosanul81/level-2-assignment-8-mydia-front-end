@@ -5,6 +5,7 @@ import { LiaHomeSolid } from "react-icons/lia";
 import { FcIdea } from "react-icons/fc";
 import { RiBloggerLine } from "react-icons/ri";
 import { useUser } from "@/context/UserContext";
+
 import {
   Dropdown,
   DropdownTrigger,
@@ -13,6 +14,7 @@ import {
 } from "@heroui/dropdown";
 
 import Image from "next/image";
+import defaultUserIcon from "@/utils/defaultUserIcon";
 export default function Navbar() {
   // const user = useContext(UserContext);
   const { user } = useUser();
@@ -31,13 +33,15 @@ export default function Navbar() {
     </>
   );
   return (
-    <div className="flex justify-between items-center border-b-1 border-gray-400 bg-white py-3 z-50">
+    <div className="flex justify-between items-center border-b-1 border-gray-400 bg-white py-1 z-50">
       <div>
         {/* <Image width={70} height={70} src={logo} alt="logo" /> */}
-        <h1 className="text-4xl font-bold ">Idea Hub</h1>
+        <Link href={"/"}>
+          <h1 className="text-3xl font-bold ">MyDia</h1>
+        </Link>
       </div>
       <div>
-        <ul className="flex justify-between gap-6 text-4xl">{navlinks}</ul>
+        <ul className="flex justify-between gap-6 text-3xl">{navlinks}</ul>
       </div>
 
       <div className="space-x-3">
@@ -45,30 +49,35 @@ export default function Navbar() {
           <>
             <Dropdown placement="bottom-end">
               <DropdownTrigger>
-                {user?.data?.profilePhoto && (
-                  <Image
-                    width={50}
-                    height={50}
-                    src={user?.data?.profilePhoto}
-                    alt="profile photo"
-                    className="transition-transform w-14 h-14 rounded-full border-2 border-orange-400 p-1"
-                  />
-                )}
+                <Image
+                  width={50}
+                  height={50}
+                  src={user?.data?.profilePhoto || defaultUserIcon}
+                  alt="profile photo"
+                  className="transition-transform w-14 h-14 rounded-full border-2 border-orange-400 p-1"
+                />
               </DropdownTrigger>
               <DropdownMenu
                 aria-label="Profile Actions"
                 variant="flat"
-                className="bg-white"
+                className="bg-white rounded-md"
               >
-                <DropdownItem key="profile" className="h-14 gap-2">
+                <DropdownItem
+                  key="profile"
+                  className="h-14 gap-2 hover:bg-gray-200 "
+                >
                   <p className="font-semibold">Signed in as</p>
-                  <p className="font-semibold text-wrap">{user?.data?.email}</p>
+                  <p className="font-semibold text-wrap">{user?.data?.name}</p>
                 </DropdownItem>
-                <DropdownItem key="settings">My Settings</DropdownItem>
-                <DropdownItem key="team_settings">Team Settings</DropdownItem>
+                <DropdownItem key="myProfile">
+                  <Link href={`/profile/${user.data.email}`}>My Profile</Link>
+                </DropdownItem>
+                <DropdownItem key="settings">
+                  <Link href={"/dashboard"}>Dashboard</Link>
+                </DropdownItem>
+
                 <DropdownItem key="analytics">Analytics</DropdownItem>
-                <DropdownItem key="system">System</DropdownItem>
-                <DropdownItem key="configurations">Configurations</DropdownItem>
+
                 <DropdownItem key="help_and_feedback">
                   Help & Feedback
                 </DropdownItem>

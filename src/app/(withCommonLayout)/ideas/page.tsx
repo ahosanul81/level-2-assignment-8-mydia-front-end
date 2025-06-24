@@ -7,7 +7,7 @@ export default async function IdeaPage() {
 
   return (
     <div>
-      <h1 className="bg-red-500">Get all idea </h1>
+      <h1 className="text-black">Get all idea </h1>
     </div>
   );
 }

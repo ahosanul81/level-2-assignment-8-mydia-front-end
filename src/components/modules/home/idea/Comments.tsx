@@ -4,10 +4,11 @@ import React, { useState } from "react";
 
 import Reply from "./Reply";
 import CommentInput from "./CommentInput";
-import { IUser } from "@/types/user";
+import { IUserModified } from "@/types/user";
 import CommentUpdateDropdown from "@/components/reUseableComponent/comment/CommentUpdateDropdown";
+import defaultUserIcon from "@/utils/defaultUserIcon";
 interface IdeaProps {
-  user: IUser | null;
+  user: IUserModified | null;
   comment: TComment;
   allComments: TComment[];
   id: string; //id means ideaId
@@ -37,7 +38,7 @@ export default function Comments({
               <Image
                 width={50}
                 height={50}
-                src={comment?.member?.profilePhoto}
+                src={comment?.member?.profilePhoto || defaultUserIcon}
                 alt="profile photo"
                 className="rounded-full w-7 h-7"
               />

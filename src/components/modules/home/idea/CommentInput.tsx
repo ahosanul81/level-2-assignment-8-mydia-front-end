@@ -1,5 +1,6 @@
 import { addComment, addReply, updateComment } from "@/services/comment";
-import { IUser } from "@/types/user";
+import { IUserModified } from "@/types/user";
+import defaultUserIcon from "@/utils/defaultUserIcon";
 import Image from "next/image";
 import React from "react";
 import { FaLocationArrow } from "react-icons/fa6";
@@ -7,7 +8,7 @@ import { toast } from "sonner";
 
 interface UserProps {
   id: string;
-  user: IUser | null;
+  user: IUserModified | null;
   parentId: string | null;
   commentId: string | null;
   fnName: string;
@@ -31,10 +32,10 @@ export default function CommentInput({
 
     if (fnName === "addComment" && comment && ideaId && user?.data?.id) {
       const res = await addComment(ideaId, user?.data?.id, comment);
-      console.log(res);
 
       if (res.success) {
         toast.success("Comment posted successfully!");
+
         form.reset();
       } else {
         toast.error(res.message);
@@ -73,7 +74,7 @@ export default function CommentInput({
           <Image
             width={50}
             height={50}
-            src={user?.data?.profilePhoto}
+            src={user?.data?.profilePhoto || defaultUserIcon}
             alt="profile photo"
             className="rounded-full w-7 h-7"
           />

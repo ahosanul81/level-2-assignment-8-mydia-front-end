@@ -1,12 +1,12 @@
 import { addDownVote, addUpVote } from "@/services/vote";
 import { TVote } from "@/types/idea";
-import { IUser } from "@/types/user";
+import { IUserModified } from "@/types/user";
 import React from "react";
 import { MdOutlineThumbDownOffAlt, MdOutlineThumbUpAlt } from "react-icons/md";
 interface VoteProps {
   id: string;
-  user: IUser | null;
-  votes: TVote[];
+  user: IUserModified | null;
+  votes: TVote[] | undefined;
   voteCounts: { [key: string]: number };
   setUpVotedId: React.Dispatch<
     React.SetStateAction<{ [key: string]: boolean }>

@@ -2,7 +2,7 @@
 
 import { getCurrentUser } from "@/services/auth";
 import { userFromDB } from "@/services/user";
-import { IUser } from "@/types/user";
+import { IUserModified } from "@/types/user";
 
 import {
   createContext,
@@ -12,18 +12,18 @@ import {
   useEffect,
   useState,
 } from "react";
-interface IUserProviderValue {
-  user: IUser | null;
-  setUser: (user: IUser | null) => void;
+interface IUserModifiedProviderValue {
+  user: IUserModified | null;
+  setUser: (user: IUserModified | null) => void;
   isLoading: boolean;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
 }
-export const UserContext = createContext<IUserProviderValue | undefined>(
-  undefined
-);
+export const UserContext = createContext<
+  IUserModifiedProviderValue | undefined
+>(undefined);
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<IUser | null>(null);
+  const [user, setUser] = useState<IUserModified | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   const handleUSer = async () => {

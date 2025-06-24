@@ -6,8 +6,6 @@ export const addComment = async (
   memberId: string,
   text: string
 ) => {
-  console.log({ ideaId, memberId, text });
-
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_API}/comments/add-comment/${ideaId}`,
@@ -34,8 +32,6 @@ export const addReply = async (
   parentId: string | null,
   text: string
 ) => {
-  console.log({ ideaId, parentId, text });
-
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_API}/comments/add-reply-comment/${ideaId}`,

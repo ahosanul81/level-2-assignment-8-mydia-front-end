@@ -3,9 +3,9 @@ import { TComment } from "@/types/idea";
 import Image from "next/image";
 import React, { useState } from "react";
 import CommentInput from "./CommentInput";
-import { IUser } from "@/types/user";
+import { IUserModified } from "@/types/user";
 interface replyProps {
-  user: IUser | null;
+  user: IUserModified | null;
   comment: TComment;
   replyItem: TComment;
 }
