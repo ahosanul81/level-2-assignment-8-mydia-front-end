@@ -1,30 +1,38 @@
 "use client";
 
+import FormFileUpload from "@/components/reUseableComponent/form/FormFileUpload";
 import { useUser } from "@/context/UserContext";
-import { loginUser } from "@/services/auth";
+import { createMember } from "@/services/user";
+
 import { useRouter, useSearchParams } from "next/navigation";
 
-import { SubmitHandler, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 type Inputs = {
   email: string;
+  name: string;
+  contactNumber: string;
+  address: string;
   password: string;
+  files: File[];
 };
-export default function LoginForm() {
+export default function SignUpForm() {
   const { refreshUser } = useUser(); // UserContext
   const searchParams = useSearchParams();
   const router = useRouter();
   const redirect = searchParams.get("redirectPath");
   const {
+    control,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    // console.log(data);
+    console.log(data);
 
-    const res = await loginUser(data);
-    // console.log(user);
+    // const res = { success: false, message: "" };
+    const res = await createMember(data);
+    console.log(res);
     if (res?.success) {
       await refreshUser();
       toast.success(res?.message);
@@ -40,38 +48,96 @@ export default function LoginForm() {
   console.log(errors);
 
   return (
-    <div className=" w-1/4  p-3 space-y-3 rounded-xl bg-gray-200 dark:bg-gray-50 dark:text-gray-800 mx-auto border-1 border-gray-400">
-      <h1 className="text-2xl font-bold text-center">Login</h1>
+    <div className=" w-2/4  p-3 space-y-3 rounded-xl bg-gray-200 dark:bg-gray-50 dark:text-gray-800 mx-auto border-1 border-gray-400">
+      <h1 className="text-2xl font-bold text-center">Sign Up</h1>
       <form onSubmit={handleSubmit(onSubmit)} action="" className="space-y-6">
-        <div className="space-y-1 text-sm">
-          <label htmlFor="username" className="block dark:text-gray-600">
-            Username
-          </label>
-          <input
-            {...register("email")}
-            required
-            type="text"
-            id="email"
-            placeholder="Email"
-            className="w-full px-4 py-3 rounded-md border border-gray-300 focus:dark:border-violet-600"
-          />
-        </div>
-        <div className="space-y-1 text-sm">
-          <label htmlFor="password" className="block dark:text-gray-600">
-            Password
-          </label>
-          <input
-            {...register("password")}
-            required
-            type="password"
-            id="password"
-            placeholder="Password"
-            className="w-full px-4 py-3 rounded-md border border-gray-300 focus:dark:border-violet-600"
-          />
-          <div className="flex justify-end text-xs dark:text-gray-600">
-            <a rel="noopener noreferrer" href="#">
-              Forgot Password?
-            </a>
+        <div className="flex justify-around items-center">
+          {/* form left side  */}
+          <div>
+            <div className="space-y-1 text-sm">
+              <label htmlFor="username" className="block dark:text-gray-600">
+                User Email
+              </label>
+              <input
+                {...register("email")}
+                required
+                type="text"
+                id="email"
+                placeholder="Email"
+                className="w-full px-4 py-3 rounded-md border border-gray-300 focus:dark:border-violet-600"
+              />
+            </div>
+            <div className="space-y-1 text-sm">
+              <label htmlFor="username" className="block dark:text-gray-600">
+                Name
+              </label>
+              <input
+                {...register("name")}
+                required
+                type="text"
+                id="name"
+                placeholder="Write your name"
+                className="w-full px-4 py-3 rounded-md border border-gray-300 focus:dark:border-violet-600"
+              />
+            </div>
+            <div className="space-y-1 text-sm">
+              <label htmlFor="username" className="block dark:text-gray-600">
+                Contact Number
+              </label>
+              <input
+                {...register("contactNumber")}
+                required
+                type="number"
+                id="contactNumber"
+                placeholder="Write your Contact Number"
+                className="w-full px-4 py-3 rounded-md border border-gray-300 focus:dark:border-violet-600"
+              />
+            </div>
+            <div className="space-y-1 text-sm">
+              <label htmlFor="username" className="block dark:text-gray-600">
+                Address
+              </label>
+              <input
+                {...register("address")}
+                required
+                type="text"
+                id="address"
+                placeholder="Write your address"
+                className="w-full px-4 py-3 rounded-md border border-gray-300 focus:dark:border-violet-600"
+              />
+            </div>
+            <div className="space-y-1 text-sm">
+              <label htmlFor="password" className="block dark:text-gray-600">
+                Password
+              </label>
+              <input
+                {...register("password")}
+                required
+                type="password"
+                id="password"
+                placeholder="Password"
+                className="w-full px-4 py-3 rounded-md border border-gray-300 focus:dark:border-violet-600"
+              />
+              <div className="flex justify-end text-xs dark:text-gray-600">
+                <a rel="noopener noreferrer" href="#">
+                  Forgot Password?
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* form right side */}
+          <div>
+            <Controller
+              name="files"
+              control={control}
+              render={({ field }) => (
+                <FormFileUpload
+                  value={field.value || []}
+                  onChange={(files) => field.onChange(files)}
+                />
+              )}
+            />
           </div>
         </div>
         <button

@@ -16,7 +16,7 @@ export default async function HomePage() {
         <LeftSidebar />
       </div>
 
-      <div className="w-3/5  mt-18 overflow-y-auto mx-auto h-full">
+      <div className="w-3/5  overflow-y-auto mx-auto mt-16">
         <AddIdea />
         <div className="w-4/5 mx-auto">
           <Idea data={data.data} />

@@ -21,6 +21,7 @@ import DeleteIdea from "./delete-idea/DeleteIdea";
 import { initPayment } from "@/services/payment/initPayment";
 import { redirect } from "next/navigation";
 import { formateDate } from "@/utils/formateDate";
+import Link from "next/link";
 
 interface IdeaProps {
   data: TIdea[];
@@ -149,15 +150,19 @@ export default function Idea({ data }: IdeaProps) {
               <CardHeader className="flex flex-col justify-start items-start">
                 <div className="w-full flex justify-between mb-2 relative">
                   <div className="flex gap-3">
-                    <Image
-                      alt="profile photo"
-                      src={member?.profilePhoto || defaultUserIcon}
-                      width={50}
-                      height={50}
-                      className="w-10 h-10 rounded-full"
-                    />
+                    <Link href={`/profile/${member.email}`}>
+                      <Image
+                        alt="profile photo"
+                        src={member?.profilePhoto || defaultUserIcon}
+                        width={50}
+                        height={50}
+                        className="w-10 h-10 rounded-full"
+                      />
+                    </Link>
                     <div>
-                      <h1>{member?.name}</h1>
+                      <Link href={`/profile/${member.email}`}>
+                        <h1>{member?.name}</h1>
+                      </Link>
                       <p className="text-xs">{formattedDateOfCreatedAt}</p>
                     </div>
                   </div>

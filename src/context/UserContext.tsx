@@ -1,6 +1,6 @@
 "use client";
 
-import { getCurrentUser } from "@/services/auth";
+import { getCurrentUserFromToken } from "@/services/auth";
 import { userFromDB } from "@/services/user";
 import { IUserModified } from "@/types/user";
 
@@ -17,6 +17,7 @@ interface IUserModifiedProviderValue {
   setUser: (user: IUserModified | null) => void;
   isLoading: boolean;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
+  refreshUser: () => Promise<void>;
 }
 export const UserContext = createContext<
   IUserModifiedProviderValue | undefined
@@ -26,20 +27,30 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<IUserModified | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const handleUSer = async () => {
-    const userData = await getCurrentUser();
-
-    if (userData) {
-      const user = await userFromDB(userData);
-      setUser(user);
+  const refreshUser = async () => {
+    setIsLoading(true);
+    try {
+      const userData = await getCurrentUserFromToken();
+      if (userData) {
+        const user = await userFromDB(userData);
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    } catch {
+      setUser(null);
+    } finally {
       setIsLoading(false);
     }
   };
+
   useEffect(() => {
-    handleUSer();
-  }, [isLoading]);
+    refreshUser(); // ✅ run only once on mount
+  }, []);
   return (
-    <UserContext.Provider value={{ user, setUser, isLoading, setIsLoading }}>
+    <UserContext.Provider
+      value={{ user, setUser, isLoading, setIsLoading, refreshUser }}
+    >
       {children}
     </UserContext.Provider>
   );

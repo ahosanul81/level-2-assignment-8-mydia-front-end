@@ -1,8 +1,41 @@
 "use server";
 
-import { jwtDecode } from "jwt-decode";
+import { cookies } from "next/headers";
 import { getTokenFromCookies } from "../token/getToken";
+type TCreateMemberPayload = {
+  email: string;
+  name: string;
+  contactNumber: string;
+  address: string;
+  password: string;
+  files: File[];
+};
 
+export const createMember = async (payload: TCreateMemberPayload) => {
+  const { files, password, ...rest } = payload;
+  const formData = new FormData();
+  const data = {
+    password,
+    userData: { ...rest },
+  };
+  formData.append("data", JSON.stringify(data));
+  files?.forEach((file) => {
+    formData.append("files", file);
+  });
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_API}/users/create-member`,
+    {
+      method: "POST",
+      body: formData,
+    }
+  );
+  const result = await res.json();
+  if (result.success) {
+    (await cookies()).set("accessToken", result.data.accessToken);
+  }
+  return result;
+};
 export const userFromDB = async (userData: { email: string; role: string }) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/users/user`, {
     method: "POST",

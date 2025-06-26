@@ -39,10 +39,10 @@ export const addIdea = async (formData) => {
     return Error(error);
   }
 };
-export const getMyIdea = async () => {
+export const getMyIdea = async (email: string) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/ideas/get/my-idea`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/ideas/get/my-idea/${email}`,
       {
         method: "GET",
         headers: {

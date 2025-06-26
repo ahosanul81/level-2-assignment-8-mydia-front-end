@@ -11,7 +11,7 @@ interface MyProfilePageProps {
 export default async function MyProfilePage(props: MyProfilePageProps) {
   const { email } = await props.params;
   const user = await getMe(email);
-  const ideas = await getMyIdea();
+  const ideas = await getMyIdea(email);
 
   return (
     <div className="">
@@ -20,13 +20,15 @@ export default async function MyProfilePage(props: MyProfilePageProps) {
           <ProfileTop data={user?.data} />
         </div>
       </div>
-      <div className="flex  w-[70%] h-full mx-auto ">
+      <div className="flex justify-between gap-4 w-[70%] h-full mx-auto ">
         <div className="w-1/3">
-          <ProfileLeft />
+          <ProfileLeft user={user?.data} />
         </div>
-        <div className="w-2/3">
+        <div className="w-2/3 flex justify-end">
           {Array.isArray(ideas.data) && ideas.data?.length > 0 ? (
-            <Idea data={ideas.data} />
+            <div className="w-full">
+              <Idea data={ideas.data} />
+            </div>
           ) : (
             <div className="flex justify-center items-center w-full h-[calc(100vh-3.5rem)] text-gray-400">
               <span className="text-4xl">You have not added any idea yet.</span>

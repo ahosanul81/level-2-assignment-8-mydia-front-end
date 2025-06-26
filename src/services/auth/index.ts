@@ -2,6 +2,7 @@
 "use server";
 import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
+import { getTokenFromCookies } from "../token/getToken";
 type TUserData = {
   email: string;
   password: string;
@@ -27,8 +28,21 @@ export const loginUser = async (userData: TUserData) => {
     return Error(error);
   }
 };
+export const logOutUser = async () => {
+  try {
+    const token = await getTokenFromCookies();
+    if (!token) {
+      throw new Error("You already have logged out");
+    }
+    (await cookies()).delete("accessToken");
 
-export const getCurrentUser = async () => {
+    return { success: true, message: "Logged out successfully" };
+  } catch {
+    return { success: false, message: "Logged out failed" };
+  }
+};
+
+export const getCurrentUserFromToken = async () => {
   const accessToken = (await cookies()).get("accessToken")?.value;
 
   let decodedData = null;

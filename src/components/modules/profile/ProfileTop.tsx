@@ -1,28 +1,11 @@
+import { IUser } from "@/types/user";
 import defaultUserIcon from "@/utils/defaultUserIcon";
 import Image from "next/image";
 import React from "react";
 import { CiEdit } from "react-icons/ci";
 
 interface ProfileTopProps {
-  data: {
-    id: string;
-    name: string;
-    email: string;
-    role: string;
-    status: string;
-    Member?: {
-      id: string;
-      profilePhoto: string;
-      contactNumber: string;
-      address: string;
-    };
-    Admin?: {
-      id: string;
-      profilePhoto: string;
-      contactNumber: string;
-      address: string;
-    };
-  };
+  data: IUser;
 }
 export default function ProfileTop({ data }: ProfileTopProps) {
   return (

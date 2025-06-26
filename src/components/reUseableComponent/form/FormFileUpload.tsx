@@ -113,7 +113,12 @@ export default function FormFileUpload({ value, onChange }: Props) {
           <p className="text-muted-foreground text-xs">
             SVG, PNG, JPG or GIF (max. {maxSizeMB}MB)
           </p>
-          <Button variant="outline" className="mt-4" onClick={openFileDialog}>
+          <Button
+            type="button"
+            variant="outline"
+            className="mt-4"
+            onClick={openFileDialog}
+          >
             <UploadIcon className="-ms-1 opacity-60" aria-hidden="true" />
             Select images
           </Button>

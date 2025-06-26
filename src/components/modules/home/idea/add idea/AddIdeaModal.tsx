@@ -249,11 +249,21 @@ export default function AddIdeaModal({
 
             {/* File Upload */}
             <div className="grid w-full gap-3">
-              <Controller
+              {/* <Controller
                 name="files"
                 control={control}
                 render={({ field }) => (
                   <FormFileUpload onChange={(file) => field.onChange(file)} />
+                )}
+              /> */}
+              <Controller
+                name="files"
+                control={control}
+                render={({ field }) => (
+                  <FormFileUpload
+                    value={field.value || []}
+                    onChange={(files) => field.onChange(files)}
+                  />
                 )}
               />
             </div>

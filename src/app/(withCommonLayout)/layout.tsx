@@ -7,7 +7,7 @@ export default function CommonLayout({ children }: { children: ReactNode }) {
       <div className="fixed top-0 left-0 w-full z-20">
         <Navbar></Navbar>
       </div>
-      <div className="mt-16 bg-gray-200">{children}</div>
+      <div className=" bg-gray-200">{children}</div>
     </div>
   );
 }
