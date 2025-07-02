@@ -5,7 +5,7 @@ export default function DashBoardLeftSidebar() {
   const user = [{ to: "/dashboard/user/status", title: "status" }];
   const idea = [{ to: "/dashboard/idea/status", title: "update status" }];
   return (
-    <div className="relative flex h-screen w-full max-w-[17rem] flex-col rounded-xl bg-white bg-clip-border p-4 text-gray-700 shadow-xl shadow-blue-gray-900/5">
+    <div className="relative flex  h-screen w-full max-w-[17rem] flex-col rounded-xl  bg-clip-border p-4 text-gray-700 shadow-xl shadow-blue-gray-900/5">
       <h2 className="text-lg font-semibold mb-4">Dashboard</h2>
 
       <nav className="flex min-w-[240px] flex-col gap-4 p-2 font-sans text-base font-normal text-blue-gray-700">

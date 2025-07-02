@@ -1,5 +1,7 @@
 "use client";
 import UpdateStatus from "@/components/modules/dashboard/rightSide/idea/update-status/UpdateStatus";
+import CommonLoadingSpinner from "@/components/modules/loadingSpinner/CommonLoadingSpinner";
+import { useUser } from "@/context/UserContext";
 
 import { getAllStatusIdea } from "@/services/idea";
 import { TIdea } from "@/types/idea";
@@ -7,17 +9,24 @@ import { TIdea } from "@/types/idea";
 import React, { useEffect, useState } from "react";
 
 export default function UpdateIdeaPage() {
+  const { isLoading, setIsLoading } = useUser();
   const [selectedStatus, setSelectedStatus] = useState<string>("pending");
   const [ideaData, setIdeaData] = useState<TIdea[]>([]);
-  console.log(selectedStatus);
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchIdea = async () => {
       const idea = await getAllStatusIdea(selectedStatus);
       setIdeaData(idea.data);
+      setIsLoading(false);
     };
     fetchIdea();
-  }, [selectedStatus]);
+  }, [selectedStatus, setIsLoading]);
+
+  if (isLoading) {
+    return <CommonLoadingSpinner />;
+  }
+
   return (
     <>
       <div className="flex justify-end mt-6">

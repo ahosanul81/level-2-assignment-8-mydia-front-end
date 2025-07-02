@@ -1,5 +1,5 @@
 import { addComment, addReply, updateComment } from "@/services/comment";
-import { IUserModified } from "@/types/user";
+import { IUser } from "@/types/user";
 import defaultUserIcon from "@/utils/defaultUserIcon";
 import Image from "next/image";
 import React from "react";
@@ -8,7 +8,7 @@ import { toast } from "sonner";
 
 interface UserProps {
   id: string;
-  user: IUserModified | null;
+  user: IUser | null;
   parentId: string | null;
   commentId: string | null;
   fnName: string;
@@ -30,8 +30,8 @@ export default function CommentInput({
       ?.value;
     // console.log(ideaId, user);
 
-    if (fnName === "addComment" && comment && ideaId && user?.data?.id) {
-      const res = await addComment(ideaId, user?.data?.id, comment);
+    if (fnName === "addComment" && comment && ideaId && user?.memberId) {
+      const res = await addComment(ideaId, user?.memberId, comment);
 
       if (res.success) {
         toast.success("Comment posted successfully!");
@@ -41,10 +41,10 @@ export default function CommentInput({
         toast.error(res.message);
       }
     }
-    if (fnName === "updateComment" && comment && ideaId && user?.data?.id) {
+    if (fnName === "updateComment" && comment && ideaId && user?.memberId) {
       const res = await updateComment(
         ideaId,
-        user?.data?.id,
+        user?.memberId,
         commentId,
         comment
       );
@@ -56,8 +56,8 @@ export default function CommentInput({
         toast.error(res.message);
       }
     }
-    if (fnName === "addReply" && comment && ideaId && user?.data?.id) {
-      const res = await addReply(ideaId, user?.data?.id, parentId, comment);
+    if (fnName === "addReply" && comment && ideaId && user?.memberId) {
+      const res = await addReply(ideaId, user?.memberId, parentId, comment);
 
       if (res.success) {
         toast.success("Added reply successfully!");
@@ -70,11 +70,11 @@ export default function CommentInput({
   return (
     <form onSubmit={(event) => handleAddComment(event, id)}>
       <div className="flex items-center gap-2 relative w-full mt-2 mb-2">
-        {user?.data?.profilePhoto && (
+        {user?.profilePhoto && (
           <Image
             width={50}
             height={50}
-            src={user?.data?.profilePhoto || defaultUserIcon}
+            src={user?.profilePhoto || defaultUserIcon}
             alt="profile photo"
             className="rounded-full w-7 h-7"
           />
@@ -82,7 +82,7 @@ export default function CommentInput({
         <input
           type="text"
           name="comment"
-          placeholder={`Comment as ${user?.data?.name}`}
+          placeholder={`Comment as ${user?.name}`}
           className="w-full py-2 bg-gray-100 px-3 pr-10 rounded-sm border border-gray-200"
         />
         <button

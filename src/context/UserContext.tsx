@@ -2,7 +2,7 @@
 
 import { getCurrentUserFromToken } from "@/services/auth";
 import { userFromDB } from "@/services/user";
-import { IUserModified } from "@/types/user";
+import { IUser } from "@/types/user";
 
 import {
   createContext,
@@ -13,8 +13,8 @@ import {
   useState,
 } from "react";
 interface IUserModifiedProviderValue {
-  user: IUserModified | null;
-  setUser: (user: IUserModified | null) => void;
+  user: IUser | null;
+  setUser: (user: IUser | null) => void;
   isLoading: boolean;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
   refreshUser: () => Promise<void>;
@@ -24,7 +24,7 @@ export const UserContext = createContext<
 >(undefined);
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<IUserModified | null>(null);
+  const [user, setUser] = useState<IUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   const refreshUser = async () => {
@@ -33,7 +33,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       const userData = await getCurrentUserFromToken();
       if (userData) {
         const user = await userFromDB(userData);
-        setUser(user);
+        setUser(user.data);
       } else {
         setUser(null);
       }

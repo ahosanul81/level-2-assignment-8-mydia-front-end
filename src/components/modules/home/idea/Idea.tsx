@@ -22,13 +22,19 @@ import { initPayment } from "@/services/payment/initPayment";
 import { redirect } from "next/navigation";
 import { formateDate } from "@/utils/formateDate";
 import Link from "next/link";
+import CommonLoadingSpinner from "../../loadingSpinner/CommonLoadingSpinner";
 
 interface IdeaProps {
   data: TIdea[];
 }
 export default function Idea({ data }: IdeaProps) {
+  const { user, isLoading, setIsLoading } = useUser();
   const [currentUrl, setCurrentUrl] = useState("");
-
+  useEffect(() => {
+    if (data && data.length > 0) {
+      setIsLoading(false);
+    }
+  }, [data, setIsLoading]);
   useEffect(() => {
     if (typeof window !== "undefined") {
       setCurrentUrl(window.location.href);
@@ -37,8 +43,6 @@ export default function Idea({ data }: IdeaProps) {
   // console.log(currentUrl);
 
   // console.log(data);
-  const { user } = useUser();
-  // console.log(user);
 
   // upVote states
   const [upVotedId, setUpVotedId] = useState<{ [key: string]: boolean }>({});
@@ -83,7 +87,7 @@ export default function Idea({ data }: IdeaProps) {
       const upVoted = idea.votes?.find(
         (vote) =>
           vote.ideaId === idea.id &&
-          vote.memberId === user?.data.id &&
+          vote.memberId === user?.memberId &&
           vote.upVote === 1
       );
 
@@ -96,7 +100,7 @@ export default function Idea({ data }: IdeaProps) {
       const downVoted = idea.votes?.find(
         (vote) =>
           vote.ideaId === idea.id &&
-          vote.memberId === user?.data.id &&
+          vote.memberId === user?.memberId &&
           vote.downVote === 1
       );
       if (downVoted) {
@@ -108,9 +112,12 @@ export default function Idea({ data }: IdeaProps) {
     });
 
     // comment mechanism
-  }, [data, user?.data?.id]);
+  }, [data, user?.memberId]);
 
-  const handlePayment = async (ideaId: string, memberId: string) => {
+  const handlePayment = async (
+    ideaId: string,
+    memberId: string | undefined
+  ) => {
     console.log("ideaId", ideaId);
     console.log("memberId", memberId);
 
@@ -120,7 +127,9 @@ export default function Idea({ data }: IdeaProps) {
     // window.open(res.url, "_blank");
   };
   // console.log(user?.data.id);
-
+  if (isLoading === true) {
+    return <CommonLoadingSpinner />;
+  }
   return (
     <div className="grid grid-cols-1  mx-auto gap-4 py-4">
       {data?.map(
@@ -285,9 +294,9 @@ export default function Idea({ data }: IdeaProps) {
                   </p>
                 </div>
                 <div className="w-full text-right">
-                  {user?.data?.id && (
+                  {user?.memberId && (
                     <button
-                      onClick={() => handlePayment(id, user?.data?.id)}
+                      onClick={() => handlePayment(id, user?.memberId)}
                       type="button"
                       className="view-button view-button:hover"
                     >

@@ -1,11 +1,11 @@
 import { addDownVote, addUpVote } from "@/services/vote";
 import { TVote } from "@/types/idea";
-import { IUserModified } from "@/types/user";
+import { IUser } from "@/types/user";
 import React from "react";
 import { MdOutlineThumbDownOffAlt, MdOutlineThumbUpAlt } from "react-icons/md";
 interface VoteProps {
   id: string;
-  user: IUserModified | null;
+  user: IUser | null;
   votes: TVote[] | undefined;
   voteCounts: { [key: string]: number };
   setUpVotedId: React.Dispatch<
@@ -30,11 +30,11 @@ export default function Vote({
   // identify already voted or not
   const userUpVoted = votes?.find(
     ({ ideaId, memberId, upVote }) =>
-      ideaId === id && memberId === user?.data?.id && upVote === 1
+      ideaId === id && memberId === user?.memberId && upVote === 1
   );
   const userDownVoted = votes?.find(
     ({ ideaId, memberId, downVote }) =>
-      ideaId === id && memberId === user?.data?.id && downVote === 1
+      ideaId === id && memberId === user?.memberId && downVote === 1
   );
   return (
     <div className="flex items-center gap-1 ">

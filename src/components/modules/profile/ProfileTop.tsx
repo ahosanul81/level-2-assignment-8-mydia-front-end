@@ -5,21 +5,21 @@ import React from "react";
 import { CiEdit } from "react-icons/ci";
 
 interface ProfileTopProps {
-  data: IUser;
+  user: IUser | null;
 }
-export default function ProfileTop({ data }: ProfileTopProps) {
+export default function ProfileTop({ user }: ProfileTopProps) {
   return (
-    <div className="flex justify-between items-center bg-white py-3">
+    <div className="flex justify-between items-center py-6">
       <div className="flex items-center gap-3">
         <Image
           alt="profile photo"
-          src={data.Member?.profilePhoto || defaultUserIcon}
+          src={user?.profilePhoto || defaultUserIcon}
           width={50}
           height={50}
-          className="w-28 h-28 rounded-full"
+          className="w-16 sm:w-28 h-16 sm:h-28 rounded-full"
         />
         <div>
-          <h1 className="text-3xl font-bold">{data.name}</h1>
+          <h1 className="text-xl sm:text-3xl font-bold">{user?.name}</h1>
         </div>
       </div>
       <div className="">

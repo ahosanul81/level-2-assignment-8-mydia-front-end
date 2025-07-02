@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
+
 import { CustomDropdown } from "@/components/reUseableComponent/dropdown/CustomDropdown";
 import { updateIdeaStatus } from "@/services/idea";
 // import { useUser } from "@/context/UserContext";
@@ -14,19 +15,17 @@ interface UpdateStatusProps {
   data: TIdea[];
 }
 export default function UpdateStatus({ data }: UpdateStatusProps) {
-  //   const { user } = useUser();
   const [expandId, setExpandId] = useState<string | null>(null);
   const [updatedStatus, setUpdatedStatus] = useState<{
     [key: string]: boolean;
   }>({});
   const [selectStatus, setSelectedStatus] = useState<string>("");
+
   const handeleStatus = async (ideaId: string, status: string) => {
     setUpdatedStatus((prev) => ({ ...prev, [ideaId]: !prev[ideaId] }));
     setSelectedStatus(status);
     try {
       const res = await updateIdeaStatus(ideaId, status);
-      console.log(res);
-
       if (res.success) {
         toast.success(res.message);
       } else {
@@ -36,6 +35,7 @@ export default function UpdateStatus({ data }: UpdateStatusProps) {
       toast.error(error);
     }
   };
+
   return (
     <>
       {data?.map(

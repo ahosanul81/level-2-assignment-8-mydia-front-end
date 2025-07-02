@@ -116,6 +116,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
+import CommonLoadingSpinner from "@/components/modules/loadingSpinner/CommonLoadingSpinner";
 import { CustomDropdown } from "@/components/reUseableComponent/dropdown/CustomDropdown";
 import {
   Table,
@@ -127,13 +128,26 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useUser } from "@/context/UserContext";
 import { getAllUser, updateUserStatus } from "@/services/user";
-import { IUser } from "@/types/user";
+
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
+interface IUsertable {
+  id: string;
+  email: string;
+  name: string;
+  password: string;
+  role: string;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export function UserTable() {
+  const { isLoading, setIsLoading } = useUser();
   const [updatedStatus, setUpdatedStatus] = useState<{
     [userId: string]: string;
   }>({});
@@ -144,19 +158,20 @@ export function UserTable() {
   const page: string | null = searchParams.get("page");
   const limit: string | null = searchParams.get("limit");
 
-  const [userData, setUserData] = useState<IUser[]>([]);
+  const [userData, setUserData] = useState<IUsertable[]>([]);
 
   useEffect(() => {
     const fetchUsers = async () => {
       const users = await getAllUser({ role, status, page, limit });
       setUserData(users.data);
+      setIsLoading(false);
     };
+    setIsLoading(true);
     fetchUsers();
-  }, [status, role, page, limit]);
+  }, [status, role, page, limit, setIsLoading]);
 
   const handleStatus = async (userId: string, status: string) => {
     setUpdatedStatus((prev) => ({ ...prev, [userId]: status }));
-
     try {
       const res = await updateUserStatus(userId, { status });
 
@@ -165,7 +180,9 @@ export function UserTable() {
 
         // Optional: Update the actual user status in local userData
         setUserData((prev) =>
-          prev.map((user) => (user.id === userId ? { ...user, status } : user))
+          prev.map((user: IUsertable) =>
+            user.id === userId ? { ...user, status } : user
+          )
         );
       } else {
         toast.error(res.message);
@@ -174,7 +191,9 @@ export function UserTable() {
       toast.error(error.message || "Something went wrong");
     }
   };
-
+  if (isLoading) {
+    return <CommonLoadingSpinner />;
+  }
   return (
     <Table>
       <TableCaption>The rest of user information</TableCaption>
@@ -187,7 +206,7 @@ export function UserTable() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {userData.map(({ id, name, email, role, status }) => {
+        {userData?.map(({ id, name, email, role, status }) => {
           const currentStatus = updatedStatus[id] || status;
 
           const statusColor =

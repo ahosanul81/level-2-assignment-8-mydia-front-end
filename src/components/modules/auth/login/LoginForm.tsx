@@ -14,7 +14,7 @@ export default function LoginForm() {
   const { refreshUser } = useUser(); // UserContext
   const searchParams = useSearchParams();
   const router = useRouter();
-  const redirect = searchParams.get("redirectPath");
+
   const {
     register,
     handleSubmit,
@@ -28,8 +28,11 @@ export default function LoginForm() {
     if (res?.success) {
       await refreshUser();
       toast.success(res?.message);
+      const redirect = searchParams.get("redirectPath");
+      console.log(redirect);
+
       if (redirect) {
-        router.push(redirect);
+        router.push(redirect || "/");
       } else {
         router.push("/");
       }
@@ -40,7 +43,7 @@ export default function LoginForm() {
   console.log(errors);
 
   return (
-    <div className=" w-1/4  p-3 space-y-3 rounded-xl bg-gray-200 dark:bg-gray-50 dark:text-gray-800 mx-auto border-1 border-gray-400">
+    <div className="w-full p-3  space-y-3 rounded-xl bg-gray-200 dark:bg-gray-50 dark:text-gray-800 mx-auto border-1 border-gray-400">
       <h1 className="text-2xl font-bold text-center">Login</h1>
       <form onSubmit={handleSubmit(onSubmit)} action="" className="space-y-6">
         <div className="space-y-1 text-sm">

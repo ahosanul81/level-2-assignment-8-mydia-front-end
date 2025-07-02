@@ -81,7 +81,7 @@ export default function AddIdeaModal({
       description: data.description,
       isPaid: data.isPaid === "Yes" ? true : false,
       categoryId: data.categoryId,
-      memberId: user?.data?.id,
+      memberId: user?.memberId,
     };
     const formData = new FormData();
     if (Array.isArray(data.files)) {
@@ -123,7 +123,7 @@ export default function AddIdeaModal({
           </svg>
         </button>
       </DialogTrigger>
-      <DialogContent className="w-3/5 max-h-[80vh] overflow-y-auto">
+      <DialogContent className="w-full sm:w-3/5 max-h-[80vh] overflow-y-auto">
         <form onSubmit={handleSubmit(onSubmit)}>
           <DialogHeader>
             <DialogTitle>Add Idea</DialogTitle>
@@ -248,7 +248,7 @@ export default function AddIdeaModal({
             </div>
 
             {/* File Upload */}
-            <div className="grid w-full gap-3">
+            <div className="grid  gap-3 ">
               {/* <Controller
                 name="files"
                 control={control}

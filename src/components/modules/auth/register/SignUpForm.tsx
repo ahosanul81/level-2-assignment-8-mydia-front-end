@@ -48,12 +48,12 @@ export default function SignUpForm() {
   console.log(errors);
 
   return (
-    <div className=" w-2/4  p-3 space-y-3 rounded-xl bg-gray-200 dark:bg-gray-50 dark:text-gray-800 mx-auto border-1 border-gray-400">
+    <div className="w-full p-2 space-y-3 rounded-xl bg-gray-200 dark:bg-gray-50 dark:text-gray-800 mx-auto border-1 border-gray-400">
       <h1 className="text-2xl font-bold text-center">Sign Up</h1>
       <form onSubmit={handleSubmit(onSubmit)} action="" className="space-y-6">
-        <div className="flex justify-around items-center">
+        <div className="flex flex-col sm:flex-row justify-around items-center">
           {/* form left side  */}
-          <div>
+          <div className="w-full px-4">
             <div className="space-y-1 text-sm">
               <label htmlFor="username" className="block dark:text-gray-600">
                 User Email
@@ -144,7 +144,7 @@ export default function SignUpForm() {
           type="submit"
           className="block w-full p-3 text-center rounded-sm dark:text-gray-50 bg-amber-700 text-white"
         >
-          Sign in
+          Sign Up
         </button>
       </form>
       <div className="flex items-center pt-4 space-x-1">
@@ -184,13 +184,13 @@ export default function SignUpForm() {
         </button>
       </div>
       <p className="text-xs text-center sm:px-6 dark:text-gray-600">
-        Dont have an account?
+        Have an account?
         <a
           rel="noopener noreferrer"
           href="#"
           className="underline dark:text-gray-800"
         >
-          Sign up
+          Sign In
         </a>
       </p>
     </div>

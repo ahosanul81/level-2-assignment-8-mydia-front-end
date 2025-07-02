@@ -3,9 +3,10 @@ import { TComment } from "@/types/idea";
 import Image from "next/image";
 import React, { useState } from "react";
 import CommentInput from "./CommentInput";
-import { IUserModified } from "@/types/user";
+import { IUser } from "@/types/user";
+import Link from "next/link";
 interface replyProps {
-  user: IUserModified | null;
+  user: IUser | null;
   comment: TComment;
   replyItem: TComment;
 }
@@ -20,22 +21,25 @@ export default function Reply({ user, comment, replyItem }: replyProps) {
     <div key={replyItem.id} className="flex justify-end">
       <div className="flex gap-2 py-3 w-11/12 bg-gray-100 rounded-xl px-3">
         {replyItem?.member?.profilePhoto ? (
-          <Image
-            width={50}
-            height={50}
-            src={replyItem.member.profilePhoto}
-            alt="profile photo"
-            className="rounded-full w-7 h-7"
-          />
+          <Link href={`/profile/${replyItem.member.email}`}>
+            <Image
+              width={50}
+              height={50}
+              src={replyItem.member.profilePhoto}
+              alt="profile photo"
+              className="rounded-full w-7 h-7"
+            />
+          </Link>
         ) : null}
-
-        <p className="text-justify flex flex-col">
-          <span className="font-bold text-xs">{replyItem.member.name}</span>
-          <span>
-            <span className="font-bold text-xs">{comment.member.name}</span>{" "}
-            {replyItem?.text}
-          </span>
-        </p>
+        <Link href={`/profile/${replyItem.member.email}`}>
+          <p className="text-justify flex flex-col">
+            <span className="font-bold text-xs">{replyItem.member.name}</span>
+            <span>
+              <span className="font-bold text-xs">{comment.member.name}</span>{" "}
+              {replyItem?.text}
+            </span>
+          </p>
+        </Link>
         <CommentUpdateDropdown
           comment={comment}
           setCommentUpdate={setCommentUpdate}

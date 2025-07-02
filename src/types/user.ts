@@ -48,10 +48,13 @@ export interface IUser {
   id: string;
   name: string;
   email: string;
-  role: string;
-  status: string;
-  Admin?: IAdmin;
-  Member?: IMember;
+  role: "admin" | "member";
+  status: "active" | "blocked" | "deleted";
+  adminId?: string;
+  memberId?: string;
+  profilePhoto?: string | null;
+  contactNumber?: string;
+  address?: string | null;
   createdAt?: Date;
   updatedAt?: Date;
 }

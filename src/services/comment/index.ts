@@ -54,7 +54,7 @@ export const addReply = async (
 };
 export const updateComment = async (
   ideaId: string,
-  memberId: string,
+  memberId: string | undefined,
   commentId: string | null,
   text: string
 ) => {

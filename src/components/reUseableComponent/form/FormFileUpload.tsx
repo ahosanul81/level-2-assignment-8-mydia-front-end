@@ -82,7 +82,7 @@ export default function FormFileUpload({ value, onChange }: Props) {
   };
 
   return (
-    <div className="flex flex-col gap-2 rounded-lg border-1 border-gray-400 focus:outline-none focus:border-blue-400">
+    <div className=" flex flex-col gap-2  rounded-lg border-1 border-gray-400 focus:outline-none focus:border-blue-400">
       {/* Drop Area */}
       <div
         onDragEnter={handleDragEnter}
@@ -91,7 +91,7 @@ export default function FormFileUpload({ value, onChange }: Props) {
         onDrop={handleDrop}
         data-dragging={isDragging || undefined}
         data-files={files.length > 0 || undefined}
-        className="border-input data-[dragging=true]:bg-accent/50 has-[input:focus]:border-ring has-[input:focus]:ring-ring/50 relative flex min-h-52 flex-col items-center overflow-hidden rounded-xl border border-dashed p-4 transition-colors not-data-[files]:justify-center has-[input:focus]:ring-[3px]"
+        className="border-input data-[dragging=true]:bg-accent/50 has-[input:focus]:border-ring has-[input:focus]:ring-ring/50 relative flex min-h-52 flex-col items-center overflow-hidden rounded-xl border border-dashed  transition-colors not-data-[files]:justify-center has-[input:focus]:ring-[3px]"
       >
         <input
           {...getInputProps()}

@@ -91,7 +91,7 @@ export default function UpdateIdeaModal({ idea }: AddIdeaModalProps) {
       description: data.description,
       isPaid: data.isPaid === "Yes" ? true : false,
       categoryId: data.categoryId,
-      memberId: user?.data?.id,
+      memberId: user?.memberId,
     };
     const formData = new FormData();
     if (Array.isArray(data.files)) {

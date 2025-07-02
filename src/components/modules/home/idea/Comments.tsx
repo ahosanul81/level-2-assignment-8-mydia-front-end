@@ -4,11 +4,12 @@ import React, { useState } from "react";
 
 import Reply from "./Reply";
 import CommentInput from "./CommentInput";
-import { IUserModified } from "@/types/user";
+import { IUser } from "@/types/user";
 import CommentUpdateDropdown from "@/components/reUseableComponent/comment/CommentUpdateDropdown";
 import defaultUserIcon from "@/utils/defaultUserIcon";
+import Link from "next/link";
 interface IdeaProps {
-  user: IUserModified | null;
+  user: IUser | null;
   comment: TComment;
   allComments: TComment[];
   id: string; //id means ideaId
@@ -34,24 +35,27 @@ export default function Comments({
       <div className="flex flex-col  gap-2 ">
         {comment.parentId === null && (
           <>
-            <div key={comment.id} className="flex items-center">
-              <Image
-                width={50}
-                height={50}
-                src={comment?.member?.profilePhoto || defaultUserIcon}
-                alt="profile photo"
-                className="rounded-full w-7 h-7"
-              />
-
-              <p
-                key={comment.id}
-                className="flex flex-col bg-gray-200 px-4 py-2 rounded-2xl"
-              >
-                <span className="text-xs font-bold">
-                  {comment?.member?.name}
-                </span>{" "}
-                <span className="text-gray-700">{comment.text}</span>
-              </p>
+            <div key={comment.id} className="flex gap-2">
+              <Link href={`/profile/${comment.member.email}`}>
+                <Image
+                  width={50}
+                  height={50}
+                  src={comment?.member?.profilePhoto || defaultUserIcon}
+                  alt="profile photo"
+                  className="rounded-full w-7 h-7"
+                />
+              </Link>
+              <Link href={`/profile/${comment.member.email}`}>
+                <p
+                  key={comment.id}
+                  className="flex flex-col bg-gray-200 px-4 py-2 rounded-2xl"
+                >
+                  <span className="text-xs font-bold">
+                    {comment?.member?.name}
+                  </span>{" "}
+                  <span className="text-gray-700">{comment.text}</span>
+                </p>
+              </Link>
 
               <div>
                 <CommentUpdateDropdown

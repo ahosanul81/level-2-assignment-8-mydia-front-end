@@ -1,7 +1,10 @@
 "use server";
 import { getTokenFromCookies } from "../token/getToken";
 
-export const initPayment = async (ideaId: string, memberId: string) => {
+export const initPayment = async (
+  ideaId: string,
+  memberId: string | undefined
+) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_API}/payment/init/${ideaId}/${memberId}`,
     {
