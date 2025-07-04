@@ -20,6 +20,8 @@ import { toast } from "sonner";
 
 export default function NavbarRight() {
   const { isLoading, setUser, user } = useUser(); // UserContext
+  // console.log(user);
+
   const router = useRouter();
   const handleLogOut = async () => {
     const res = await logOutUser();

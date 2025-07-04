@@ -1,13 +1,17 @@
+"use client";
 import UserFilter from "@/components/modules/dashboard/rightSide/user/UserFilter";
 import { UserTable } from "@/components/modules/dashboard/rightSide/user/UserTable";
+import CommonLoadingSpinner from "@/components/modules/loadingSpinner/CommonLoadingSpinner";
 
-import React from "react";
+import React, { Suspense } from "react";
 
-export default async function DashboardUserPage() {
+export default function DashboardUserPage() {
   return (
-    <div className="">
-      <UserFilter />
-      <UserTable />
+    <div>
+      <Suspense fallback={<CommonLoadingSpinner />}>
+        <UserFilter />
+        <UserTable />
+      </Suspense>
     </div>
   );
 }

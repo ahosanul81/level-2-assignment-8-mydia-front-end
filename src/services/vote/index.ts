@@ -8,7 +8,7 @@ export const addUpVote = async (ideaId: string, upVote: boolean) => {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/votes/up-vote/${ideaId}`,
+      `${process.env.NEXT_PUBLIC_BASE_BACKEND_API}/votes/up-vote/${ideaId}`,
       {
         method: "POST",
         headers: {
@@ -33,7 +33,7 @@ export const addDownVote = async (ideaId: string, downVote: boolean) => {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/votes/dwon-vote/${ideaId}`,
+      `${process.env.NEXT_PUBLIC_BASE_BACKEND_API}/votes/dwon-vote/${ideaId}`,
       {
         method: "POST",
         headers: {
@@ -56,7 +56,7 @@ export const addDownVote = async (ideaId: string, downVote: boolean) => {
 export const voteCount = async (ideaId: string) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/votes/vote-count/${ideaId}`,
+      `${process.env.NEXT_PUBLIC_BASE_BACKEND_API}/votes/vote-count/${ideaId}`,
       {
         method: "GET",
         headers: {

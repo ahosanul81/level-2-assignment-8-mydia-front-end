@@ -8,7 +8,7 @@ export const addComment = async (
 ) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/comments/add-comment/${ideaId}`,
+      `${process.env.NEXT_PUBLIC_BASE_BACKEND_API}/comments/add-comment/${ideaId}`,
       {
         method: "POST",
         headers: {
@@ -34,7 +34,7 @@ export const addReply = async (
 ) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/comments/add-reply-comment/${ideaId}`,
+      `${process.env.NEXT_PUBLIC_BASE_BACKEND_API}/comments/add-reply-comment/${ideaId}`,
       {
         method: "POST",
         headers: {
@@ -60,7 +60,7 @@ export const updateComment = async (
 ) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/comments/update-comment/${commentId}`,
+      `${process.env.NEXT_PUBLIC_BASE_BACKEND_API}/comments/update-comment/${commentId}`,
       {
         method: "PATCH",
         headers: {

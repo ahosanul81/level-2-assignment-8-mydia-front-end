@@ -7,7 +7,7 @@ import { getMyIdea } from "@/services/idea";
 import { getMe } from "@/services/user";
 import React, { Suspense } from "react";
 interface MyProfilePageProps {
-  params: { email: string };
+  params: Promise<{ email: string }>;
 }
 export default async function MyProfilePage(props: MyProfilePageProps) {
   const { email } = await props.params;

@@ -9,13 +9,16 @@ type TUserData = {
 };
 export const loginUser = async (userData: TUserData) => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/auth/login`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_BACKEND_API}/auth/login`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      }
+    );
     const result = await res.json();
 
     if (result.success) {

@@ -24,7 +24,7 @@ export const createMember = async (payload: TCreateMemberPayload) => {
   });
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_API}/users/create-member`,
+    `${process.env.NEXT_PUBLIC_BASE_BACKEND_API}/users/create-member`,
     {
       method: "POST",
       body: formData,
@@ -38,7 +38,7 @@ export const createMember = async (payload: TCreateMemberPayload) => {
 };
 export const userFromDB = async (userData: { email: string; role: string }) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_API}/users/me/${userData.email}`,
+    `${process.env.NEXT_PUBLIC_BASE_BACKEND_API}/users/me/${userData.email}`,
     {
       method: "GET",
       headers: {
@@ -59,9 +59,9 @@ export const getAllUser = async (queries: Record<string, string | null>) => {
     )
   ) as Record<string, string>;
   const query = new URLSearchParams(cleanedQueries).toString() || "";
-  // console.log(`${process.env.NEXT_PUBLIC_BASE_API}/users?${query}`);
+  // console.log(`${process.env.NEXT_PUBLIC_BASE_BACKEND_API}/users?${query}`);
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_API}/users?${query}`,
+    `${process.env.NEXT_PUBLIC_BASE_BACKEND_API}/users?${query}`,
     {
       method: "GET",
       headers: {
@@ -80,7 +80,7 @@ export const updateUserStatus = async (
   console.log(payload);
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_API}/users/update/user-status/${userId}`,
+    `${process.env.NEXT_PUBLIC_BASE_BACKEND_API}/users/update/user-status/${userId}`,
     {
       method: "PATCH",
       headers: {
@@ -96,7 +96,7 @@ export const updateUserStatus = async (
 
 export const getMe = async (email: string) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_API}/users/me/${email}`,
+    `${process.env.NEXT_PUBLIC_BASE_BACKEND_API}/users/me/${email}`,
     {
       method: "GET",
       headers: {

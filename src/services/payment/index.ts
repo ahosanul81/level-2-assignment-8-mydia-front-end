@@ -4,7 +4,7 @@ import { getTokenFromCookies } from "../token/getToken";
 export const getAllPaymentCompleted = async () => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/payment/completed`,
+      `${process.env.NEXT_PUBLIC_BASE_BACKEND_API}/payment/completed`,
       {
         method: "GET",
         headers: {

@@ -1,5 +1,8 @@
+"use client";
 import LoginForm from "@/components/modules/auth/login/LoginForm";
 import loginPageBg from "../../../../src/assets/images/loginPageBg.jpg";
+import { Suspense } from "react";
+import CommonLoadingSpinner from "@/components/modules/loadingSpinner/CommonLoadingSpinner";
 export default function LoginPage() {
   return (
     <div
@@ -9,7 +12,9 @@ export default function LoginPage() {
       }}
     >
       <div className="w-full sm:w-2/5 sm:mt-8 p-8">
-        <LoginForm />
+        <Suspense fallback={<CommonLoadingSpinner />}>
+          <LoginForm />
+        </Suspense>
       </div>
     </div>
   );

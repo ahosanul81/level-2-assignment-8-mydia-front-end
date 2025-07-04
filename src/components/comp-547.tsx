@@ -1,12 +1,10 @@
-"use client"
+"use client";
 
-import { AlertCircleIcon, ImageIcon, UploadIcon, XIcon } from "lucide-react"
+import { AlertCircleIcon, ImageIcon, UploadIcon, XIcon } from "lucide-react";
 
-import {
-  formatBytes,
-  useFileUpload,
-} from "@/hooks/use-file-upload"
-import { Button } from "@/components/ui/button"
+import { formatBytes, useFileUpload } from "@/hooks/use-file-upload";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 // Create some dummy initial files
 const initialFiles = [
@@ -31,12 +29,12 @@ const initialFiles = [
     url: "https://picsum.photos/1000/800?grayscale&random=3",
     id: "image-03-123456789",
   },
-]
+];
 
 export default function Component() {
-  const maxSizeMB = 5
-  const maxSize = maxSizeMB * 1024 * 1024 // 5MB default
-  const maxFiles = 6
+  const maxSizeMB = 5;
+  const maxSize = maxSizeMB * 1024 * 1024; // 5MB default
+  const maxFiles = 6;
 
   const [
     { files, isDragging, errors },
@@ -56,7 +54,7 @@ export default function Component() {
     multiple: true,
     maxFiles,
     initialFiles,
-  })
+  });
 
   return (
     <div className="flex flex-col gap-2">
@@ -113,8 +111,8 @@ export default function Component() {
             >
               <div className="flex items-center gap-3 overflow-hidden">
                 <div className="bg-accent aspect-square shrink-0 rounded">
-                  <img
-                    src={file.preview}
+                  <Image
+                    src={file.preview || ""}
                     alt={file.file.name}
                     className="size-10 rounded-[inherit] object-cover"
                   />
@@ -166,5 +164,5 @@ export default function Component() {
         </a>
       </p>
     </div>
-  )
+  );
 }

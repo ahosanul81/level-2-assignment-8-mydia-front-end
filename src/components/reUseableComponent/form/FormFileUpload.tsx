@@ -71,7 +71,7 @@ export default function FormFileUpload({ value, onChange }: Props) {
       ),
       ...newPreviews,
     ]);
-  }, [value]);
+  }, [value, previewData]);
 
   // Remove image by index
   const removeImage = (index: number) => {
