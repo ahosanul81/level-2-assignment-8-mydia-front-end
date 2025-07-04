@@ -3,8 +3,9 @@
 import { AlertCircleIcon, ImageIcon, UploadIcon, XIcon } from "lucide-react";
 
 import { formatBytes, useFileUpload } from "@/hooks/use-file-upload";
-import { Button } from "@/components/ui/button";
+
 import Image from "next/image";
+import { Button } from "./ui/button";
 
 // Create some dummy initial files
 const initialFiles = [
@@ -104,7 +105,7 @@ export default function Component() {
       {/* File list */}
       {files.length > 0 && (
         <div className="space-y-2">
-          {files.map((file) => (
+          {files?.map((file) => (
             <div
               key={file.id}
               className="bg-background flex items-center justify-between gap-2 rounded-lg border p-2 pe-3"
