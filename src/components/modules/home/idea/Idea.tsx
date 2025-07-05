@@ -3,7 +3,6 @@ import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
 import React, { useEffect, useState } from "react";
 import { TIdea } from "@/types/idea";
 import Image from "next/image";
-
 import { TbCurrencyTaka } from "react-icons/tb";
 import { FaRegMessage } from "react-icons/fa6";
 import { BsThreeDotsVertical } from "react-icons/bs";
