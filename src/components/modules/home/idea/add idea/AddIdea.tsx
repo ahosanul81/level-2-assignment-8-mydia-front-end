@@ -15,7 +15,7 @@ export default async function AddIdea() {
           problemStatement: "",
           proposedSolution: "",
           isPaid: false,
-          price: undefined,
+          price: null,
           description: "",
           categoryId: "",
         }}

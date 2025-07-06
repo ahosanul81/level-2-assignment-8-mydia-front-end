@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { useEffect, useState } from "react";
@@ -71,7 +72,7 @@ export default function FormFileUpload({ value, onChange }: Props) {
       ),
       ...newPreviews,
     ]);
-  }, [value, previewData]);
+  }, [value]);
 
   // Remove image by index
   const removeImage = (index: number) => {

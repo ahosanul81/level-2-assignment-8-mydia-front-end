@@ -19,8 +19,9 @@ export default function FormRadio({
     <div>
       <label className="block text-gray-700 font-medium mb-2">{label}</label>
       <div className="flex flex-wrap -mx-2">
-        {options.map((opt, index) => {
-          const labelValue = opt ? "Yes" : "No";
+        {options?.map((opt, index) => {
+          const labelValue = opt === true ? "Yes" : "No";
+          // console.log(labelValue);
 
           return (
             <div className="px-2 w-1/3" key={index}>

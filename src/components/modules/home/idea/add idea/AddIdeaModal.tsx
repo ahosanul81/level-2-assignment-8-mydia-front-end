@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   SubmitHandler,
   useForm,
@@ -40,7 +41,7 @@ interface Inputs {
   proposedSolution: string;
   description: string;
   isPaid: boolean;
-  price?: number | undefined;
+  price?: number | null;
   categoryId: string;
   memberId: string;
   files?: File;
@@ -62,9 +63,12 @@ export default function AddIdeaModal({
   defaultValues,
 }: AddIdeaModalProps) {
   const { user } = useUser();
+  const [buttonLoading, setButtonLoading] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   const {
     control,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>({
@@ -73,34 +77,49 @@ export default function AddIdeaModal({
   console.log("errors", errors);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data);
-    const ideaData: Partial<Inputs> = {
-      title: data.title,
-      problemStatement: data.problemStatement,
-      proposedSolution: data.proposedSolution,
-      description: data.description,
-      isPaid: data.isPaid === "Yes" ? true : false,
-      categoryId: data.categoryId,
-      memberId: user?.memberId,
-    };
-    const formData = new FormData();
-    if (Array.isArray(data.files)) {
-      data.files.forEach((file: File) => {
-        formData.append("files", file); // each file is a Blob
-      });
+    setButtonLoading(true);
+
+    try {
+      const ideaData: Partial<Inputs> = {
+        title: data.title,
+        problemStatement: data.problemStatement,
+        proposedSolution: data.proposedSolution,
+        description: data.description,
+        isPaid: data.isPaid,
+        price: Number(data.price),
+        categoryId: data.categoryId,
+        memberId: user?.memberId,
+      };
+      console.log(ideaData);
+
+      const formData = new FormData();
+      if (Array.isArray(data.files)) {
+        data.files.forEach((file: File) => {
+          formData.append("files", file); // each file is a Blob
+        });
+      }
+      formData.append("data", JSON.stringify(ideaData));
+
+      const res = await addIdea(formData);
+      if (res.success) {
+        setButtonLoading(false);
+        reset();
+        toast.success(res.message);
+      } else {
+        setButtonLoading(false);
+        toast.error(res.message);
+      }
+      console.log(res);
+    } catch {
+      throw new Error();
+    } finally {
+      setButtonLoading(false);
+      setOpenModal(false);
     }
-    formData.append("data", JSON.stringify(ideaData));
-    const res = await addIdea(formData);
-    if (res.success) {
-      toast.success(res.message);
-    } else {
-      toast.error(res.message);
-    }
-    console.log(res);
   };
 
   return (
-    <Dialog>
+    <Dialog open={openModal} onOpenChange={setOpenModal}>
       <DialogTrigger asChild>
         <button
           className="group cursor-pointer outline-none hover:rotate-90 duration-300"
@@ -279,6 +298,7 @@ export default function AddIdeaModal({
                     radioName="isPaid"
                     options={[true, false]}
                     {...field}
+                    value={field.value}
                   />
                 )}
               />
@@ -288,20 +308,24 @@ export default function AddIdeaModal({
                   name="price"
                   control={control}
                   render={({ field }) => (
-                    <Input type="number" {...field} placeholder="TK 1000" />
+                    <Input
+                      type="number"
+                      {...field}
+                      value={field.value ?? ""}
+                      placeholder="TK 1000"
+                    />
                   )}
                 />
               </div>
             </div>
           </div>
 
-          {/* <DialogFooter>
-            <DialogClose asChild>
-              <Button variant="outline">Cancel</Button>
-            </DialogClose>
-          </DialogFooter> */}
-          <Button type="submit" className="w-full mt-5">
-            Submit
+          <Button
+            disabled={buttonLoading}
+            type="submit"
+            className="w-full mt-5"
+          >
+            {buttonLoading ? "Adding Idea...." : "Submit"}
           </Button>
         </form>
       </DialogContent>
