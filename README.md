@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# **Sustainability Idea Hub Assignment Requirements**
 
-## Getting Started
+## **Project Overview**
 
-First, run the development server:
+Develop an online community portal where community members can share sustainably oriented ideas (e.g. reducing plastic consumption or launching a solar power project) in order to help the environment. Admins monitor the submissions, provide feedback, and make sure the best ideas are made available to all portal members for their consideration.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## **Technologies**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+    * HTML & CSS
+    * Js
+    * TS
+    * NextJs
+    * Tailwind Css
+    * Shadcn Ui
+    * Hero Ui
+    * Sonner
+    * React Icon
+    * Jwt
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## **Role Based Feature**
 
-## Learn More
+- **Admin**:
 
-To learn more about Next.js, take a look at the following resources:
+  - Can register and log in to mydia website
+  - **Logged in admin can**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    - update user status
+    - update idea status
+    - Observe completed payment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+  - may visit anyone profile with login
 
-## Deploy on Vercel
+# **Admin Routes**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Dashboard Home**: [https://mydia-nine.vercel.app/dashboard](https://mydia-nine.vercel.app/dashboard)
+  **Update User Status**: [https://mydia-nine.vercel.app/dashboard/user/status](https://mydia-nine.vercel.app/dashboard/user/status)
+  **Update Idea Satus**: [https://mydia-nine.vercel.app/dashboard/user/status](https://mydia-nine.vercel.app/dashboard/user/status)
+  **Observation Payment**: [https://mydia-nine.vercel.app/dashboard/payment/completed](https://mydia-nine.vercel.app/dashboard/payment/completed)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* **Member**:
+
+  - Can register and log in to mydia website
+  - A logged in member Have a opputunity to add a unique idea
+  - A logged in member may add comment and give vote a particular idea
+  - may visit anyone profile with login
+
+* **Member Routes**
+  **Home**: [https://mydia-nine.vercel.app](https://mydia-nine.vercel.app)
+  **Add to Idea**: go to [https://mydia-nine.vercel.app](https://mydia-nine.vercel.app) and click on **+** icon
+  **Member Profile**: [https://mydia-nine.vercel.app/:email](https://mydia-nine.vercel.app/:email)
