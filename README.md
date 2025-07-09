@@ -35,9 +35,9 @@ Develop an online community portal where community members can share sustainably
 # **Admin Routes**
 
 - **Dashboard Home**: [https://mydia-nine.vercel.app/dashboard](https://mydia-nine.vercel.app/dashboard)
-  **Update User Status**: [https://mydia-nine.vercel.app/dashboard/user/status](https://mydia-nine.vercel.app/dashboard/user/status)
-  **Update Idea Satus**: [https://mydia-nine.vercel.app/dashboard/user/status](https://mydia-nine.vercel.app/dashboard/user/status)
-  **Observation Payment**: [https://mydia-nine.vercel.app/dashboard/payment/completed](https://mydia-nine.vercel.app/dashboard/payment/completed)
+- **Update User Status**: [https://mydia-nine.vercel.app/dashboard/user/status](https://mydia-nine.vercel.app/dashboard/user/status)
+- **Update Idea Satus**: [https://mydia-nine.vercel.app/dashboard/user/status](https://mydia-nine.vercel.app/dashboard/user/status)
+- **Observation Payment**: [https://mydia-nine.vercel.app/dashboard/payment/completed](https://mydia-nine.vercel.app/dashboard/payment/completed)
 
 * **Member**:
 
@@ -47,6 +47,7 @@ Develop an online community portal where community members can share sustainably
   - may visit anyone profile with login
 
 * **Member Routes**
-  **Home**: [https://mydia-nine.vercel.app](https://mydia-nine.vercel.app)
-  **Add to Idea**: go to [https://mydia-nine.vercel.app](https://mydia-nine.vercel.app) and click on **+** icon
-  **Member Profile**: [https://mydia-nine.vercel.app/:email](https://mydia-nine.vercel.app/:email)
+
+- **Home**: [https://mydia-nine.vercel.app](https://mydia-nine.vercel.app)
+- **Add to Idea**: go to [https://mydia-nine.vercel.app](https://mydia-nine.vercel.app) and click on **+** icon
+- **Member Profile**: [https://mydia-nine.vercel.app/:email](https://mydia-nine.vercel.app/:email)
