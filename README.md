@@ -21,6 +21,13 @@ Develop an online community portal where community members can share sustainably
 
 ## **Role Based Feature**
 
+# **Admin Routes**
+
+- **Dashboard Home**: [https://mydia-nine.vercel.app/dashboard](https://mydia-nine.vercel.app/dashboard)
+- **Update User Status**: [https://mydia-nine.vercel.app/dashboard/user/status](https://mydia-nine.vercel.app/dashboard/user/status)
+- **Update Idea Satus**: [https://mydia-nine.vercel.app/dashboard/user/status](https://mydia-nine.vercel.app/dashboard/user/status)
+- **Observation Payment**: [https://mydia-nine.vercel.app/dashboard/payment/completed](https://mydia-nine.vercel.app/dashboard/payment/completed)
+
 - **Admin**:
 
   - Can register and log in to mydia website
@@ -32,12 +39,11 @@ Develop an online community portal where community members can share sustainably
 
   - may visit anyone profile with login
 
-# **Admin Routes**
+# **Member Routes**
 
-- **Dashboard Home**: [https://mydia-nine.vercel.app/dashboard](https://mydia-nine.vercel.app/dashboard)
-- **Update User Status**: [https://mydia-nine.vercel.app/dashboard/user/status](https://mydia-nine.vercel.app/dashboard/user/status)
-- **Update Idea Satus**: [https://mydia-nine.vercel.app/dashboard/user/status](https://mydia-nine.vercel.app/dashboard/user/status)
-- **Observation Payment**: [https://mydia-nine.vercel.app/dashboard/payment/completed](https://mydia-nine.vercel.app/dashboard/payment/completed)
+- **Home**: [https://mydia-nine.vercel.app](https://mydia-nine.vercel.app)
+- **Add to Idea**: go to [https://mydia-nine.vercel.app](https://mydia-nine.vercel.app) and click on **+** icon
+- **Member Profile**: [https://mydia-nine.vercel.app/:email](https://mydia-nine.vercel.app/:email)
 
 * **Member**:
 
@@ -45,9 +51,3 @@ Develop an online community portal where community members can share sustainably
   - A logged in member Have a opputunity to add a unique idea
   - A logged in member may add comment and give vote a particular idea
   - may visit anyone profile with login
-
-* **Member Routes**
-
-- **Home**: [https://mydia-nine.vercel.app](https://mydia-nine.vercel.app)
-- **Add to Idea**: go to [https://mydia-nine.vercel.app](https://mydia-nine.vercel.app) and click on **+** icon
-- **Member Profile**: [https://mydia-nine.vercel.app/:email](https://mydia-nine.vercel.app/:email)
